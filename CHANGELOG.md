@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-01-21
+
+### Added
+- **Native Context Window Support**: Added support for Claude Code's new `context_window` JSON input format
+  - Directly uses `total_input_tokens`, `total_output_tokens`, and `context_window_size` from InputData
+  - Eliminates need for transcript file parsing when using Claude Code v2.0.37+
+  - Improves accuracy by including system prompt and MCP tool definitions in context count
+
+### Changed
+- **Context Window Fallback Strategy**: Updated to prioritize native API data while maintaining backward compatibility
+  - Priority 1: Use `context_window` field from InputData (Claude Code v2.0.37+)
+  - Priority 2: Parse transcript file (legacy fallback for older versions)
+  - Priority 3: Search session history (final fallback)
+
 ## [1.0.9] - 2025-12-21
 
 ### Added
